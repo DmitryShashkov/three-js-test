@@ -62,5 +62,6 @@ export class AppComponent implements AfterViewInit {
 
         this.webGLRenderOutput.nativeElement.appendChild(renderer.domElement);
         renderer.render(scene, camera);
+
     }
 }
