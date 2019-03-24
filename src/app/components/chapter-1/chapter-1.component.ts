@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, ViewChild, OnDestroy } from '@angular/core';
 import * as THREE from 'three';
 import * as Stats from 'stats-js';
 import { GUI } from 'dat.gui';
@@ -9,7 +9,7 @@ import { Chapter1GuiControls } from '../../models/chapter-1-gui.controls';
     templateUrl: './chapter-1.component.html',
     styleUrls: ['./chapter-1.component.css'],
 })
-export class Chapter1Component implements AfterViewInit {
+export class Chapter1Component implements AfterViewInit, OnDestroy {
     private readonly scene: THREE.Scene;
     private readonly camera: THREE.PerspectiveCamera;
     private readonly renderer: THREE.WebGLRenderer;
@@ -134,5 +134,9 @@ export class Chapter1Component implements AfterViewInit {
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    public ngOnDestroy () : void {
+        this.gui.destroy();
     }
 }
